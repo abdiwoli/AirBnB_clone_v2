@@ -21,9 +21,10 @@ class FileStorage:
         with open(FileStorage.__file_path, 'w') as f:
             temp = {}
             temp.update(FileStorage.__objects)
+
             for key, val in temp.items():
                 temp[key] = val.to_dict()
-            json.dump(temp, f)
+            json.dump(temp, f, default=lambda o: o.__dict__ if isinstance(o, datetime) else None)
 
     def reload(self):
         """Loads storage dictionary from file"""
