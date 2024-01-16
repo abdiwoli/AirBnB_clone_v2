@@ -7,7 +7,7 @@ from models import HBNB_TYPE_STORAGE
 
 
 class State(BaseModel, Base):
-    """Representation of state """
+    """ state """
     __tablename__ = "states"
     name = Column(String(128), nullable=False)
     cities = relationship("City",  backref="state", cascade="delete")
