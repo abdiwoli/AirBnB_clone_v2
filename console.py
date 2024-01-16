@@ -135,9 +135,9 @@ class HBNBCommand(cmd.Cmd):
                 if val.startswith('"') and val.endswith('"'):
                     val = val[1:-1]
                 setattr(new_instance, attr, val)
-            storage.save()
+            new_instance.save()
         print(new_instance.id)
-        storage.save()
+        new_instance.save()
 
     def help_create(self):
         """ Help information for the create method """
