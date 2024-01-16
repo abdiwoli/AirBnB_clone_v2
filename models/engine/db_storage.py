@@ -34,7 +34,10 @@ class DBStorage:
         if cls:
             query_objects = self.__session.query(cls).all()
         else:
-            query_objects = [obj for cls in storage.classes.values() for obj in self.__session.query(cls).all()]
+            query_objects = [
+                    obj for cls in storage.classes.values()
+                    for obj in self.__session.query(cls).all()
+                    ]
 
         for obj in query_objects:
             key = '{}.{}'.format(obj.__class__.__name__, obj.id)
@@ -56,10 +59,13 @@ class DBStorage:
             self.__session.delete(obj)
 
     def reload(self):
-        """ Create all tables in the database and create the session """
+        """ Create all tables in the database and create session """
         from models import base_model
         Base.metadata.create_all(self.__engine)
-        session_factory = sessionmaker(bind=self.__engine, expire_on_commit=False)
+        session_factory = sessionmaker(
+                bind=self.__engine,
+                expire_on_commit=False
+                )
         Session = scoped_session(session_factory)
         self.__session = Session()
 
