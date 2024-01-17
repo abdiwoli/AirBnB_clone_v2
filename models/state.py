@@ -3,33 +3,21 @@
 from models.base_model import BaseModel, Base
 from sqlalchemy import Column, String
 from sqlalchemy.orm import relationship
-
+from models import HBNB_TYPE_STORAGE
+from models.city import City
 
 class State(BaseModel, Base):
-    """State class"""
-
+    """ state """
     __tablename__ = "states"
-
     name = Column(String(128), nullable=False)
+    cities = relationship("City",  backref="state", cascade="delete")
 
-    # For DBStorage
-    if HBNB_TYPE_STORAGE == "db":
-        cities = relationship(
-            "City", cascade="all, delete-orphan", back_populates="state"
-        )
-
-    # For FileStorage
-    else:
-
+    if HBNB_TYPE_STORAGE != "db":
         @property
         def cities(self):
-            """ Getter attribute that returns the list
-            of City instances with state_id
-            equals to the current State.id """
-            from models import storage
-
-            cities_list = []
-            for city in storage.all(City).values():
+            """Get a list of all related City objects."""
+            city_list = []
+            for city in list(models.storage.all(City).values()):
                 if city.state_id == self.id:
-                    cities_list.append(city)
-            return cities_list
+                    city_list.append(city)
+            return city_list

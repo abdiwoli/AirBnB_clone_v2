@@ -4,6 +4,12 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, scoped_session
 from os import getenv
 from models.base_model import Base
+from models.state import State
+from models.city import City
+from models.user import User
+from models.place import Place
+from models.review import Review
+from models.amenity import Amenity
 
 
 class DBStorage:
@@ -22,31 +28,29 @@ class DBStorage:
         self.__engine = create_engine('mysql+mysqldb://{}:{}@{}:3306/{}'
                                       .format(user, password, host, database),
                                       pool_pre_ping=True)
-
         if env == "test":
             Base.metadata.drop_all(self.__engine)
-
+        else:
+            Base.metadata.create_all(self.__engine)
     def all(self, cls=None):
-        """ Query on the current database session """
-        from models import storage
-
+        """Query on the current database session"""
         objects = {}
         if cls:
-            query_objects = self.__session.query(cls).all()
+            if isinstance(cls, str):
+                cls = eval(cls)
+                objs = self.__session.query(cls).all()
         else:
-            query_objects = [
-                    obj for cls in storage.classes.values()
-                    for obj in self.__session.query(cls).all()
-                    ]
-
-        for obj in query_objects:
-            key = '{}.{}'.format(obj.__class__.__name__, obj.id)
+            state_objs = self.__session.query(State).all()
+            city_objs = self.__session.query(City).all()
+            objs = state_objs + city_objs
+        for obj in objs:
+            key = "{}.{}".format(type(obj).__name__, obj.id)
             objects[key] = obj
-
         return objects
 
     def new(self, obj):
         """ Add the object to the current database session """
+        obj.id = str(obj.id)
         self.__session.add(obj)
 
     def save(self):
@@ -72,3 +76,9 @@ class DBStorage:
     def close(self):
         """ Close the current session """
         self.__session.remove()
+
+    def get_engine(self):
+        return self.__engine
+
+    def get_session(self):
+        return self.__session
