@@ -27,6 +27,12 @@ class Place(BaseModel, Base):
             "Review", backref="place", cascade="all, delete-orphan"
             )
 
+    # Define the Many-To-Many relationship with Amenity
+    amenities = relationship(
+            "Amenity", secondary="place_amenity",
+            viewonly=False, back_populates="place_amenities"
+            )
+
     # Additional code for FileStorage
     @property
     def reviews(self):
@@ -37,3 +43,19 @@ class Place(BaseModel, Base):
             if review.place_id == self.id:
                 reviews_list.append(review)
         return reviews_list
+
+    @property
+    def amenities(self):
+        """ Getter attribute for amenities in FileStorage """
+        from models import storage
+        amenity_list = []
+        for amenity in storage.all("Amenity").values():
+            if amenity.id in self.amenity_ids:
+                amenity_list.append(amenity)
+        return amenity_list
+
+    @amenities.setter
+    def amenities(self, obj):
+        """ Setter attribute for amenities in FileStorage """
+        if isinstance(obj, Amenity):
+            self.amenity_ids.append(obj.id)
