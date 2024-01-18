@@ -11,8 +11,12 @@ if HBNB_TYPE_STORAGE == 'db':
 else:
     from .engine.file_storage import FileStorage
     storage = FileStorage()
-
+from .base_model import BaseModel, Base
 from .state import State
 from .city import City
 from .review import Review
+from .user import User
+from .amenity import Amenity
+from .place import Place
+
 storage.reload()
