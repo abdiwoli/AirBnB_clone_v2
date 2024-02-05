@@ -13,3 +13,4 @@ sudo chown -hR ubuntu:ubuntu /data/
 sudo sed -i '/^server {/a \\n\tlocation /hbnb_static {\n\t\talias /data/web_static/current;\n\t}' /etc/nginx/sites-available/default
 sudo ln -sf /etc/nginx/sites-available/default /etc/nginx/sites-enabled
 sudo systemctl restart nginx
+exit 0
