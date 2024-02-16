@@ -56,7 +56,6 @@ class DBStorage:
 
         return objects
 
-
     def new(self, obj):
         """ Add the object to the current database session """
         obj.id = str(obj.id)
