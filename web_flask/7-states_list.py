@@ -18,7 +18,7 @@ def teardown_appcontext(exception):
 @app.route('/states_list', strict_slashes=False)
 def index():
     states = storage.all(State).values()
-    states_list = [state.to_dict() for state in states]
+    states_list = sorted([state.to_dict() for state in states])
     return render_template('7-states_list.html', states=states_list)
 
 
