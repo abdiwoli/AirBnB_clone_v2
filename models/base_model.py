@@ -62,8 +62,10 @@ class BaseModel:
         dictionary.pop('_sa_instance_state', None)
         dictionary.update({'__class__':
                           (str(type(self)).split('.')[-1]).split('\'')[0]})
-        dictionary['created_at'] = self.created_at.isoformat()
-        dictionary['updated_at'] = self.updated_at.isoformat()
+        if 'created_at' in dictionary and isinstance(dictionary['created_at'], datetime):
+            dictionary['created_at'] = dictionary['created_at'].isoformat()
+        if 'updated_at' in dictionary and isinstance(dictionary['updated_at'], datetime):
+            dictionary['updated_at'] = dictionary['updated_at'].isoformat()
         return dictionary
 
     def delete(self):
