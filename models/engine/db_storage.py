@@ -42,13 +42,20 @@ class DBStorage:
                 cls = eval(cls)
                 objs = self.__session.query(cls).all()
             else:
-                state_objs = self.__session.query(State).all()
-                city_objs = self.__session.query(City).all()
-                objs = state_objs + city_objs
-            for obj in objs:
-                key = "{}.{}".format(type(obj).__name__, obj.id)
-                objects[key] = obj
+                objs = self.__session.query(cls).all()
+        else:
+            # Include all relevant classes
+            classes = [State, City, User, Place, Review, Amenity]
+            objs = []
+            for cls in classes:
+                objs.extend(self.__session.query(cls).all())
+
+        for obj in objs:
+            key = "{}.{}".format(type(obj).__name__, obj.id)
+            objects[key] = obj
+
         return objects
+
 
     def new(self, obj):
         """ Add the object to the current database session """
