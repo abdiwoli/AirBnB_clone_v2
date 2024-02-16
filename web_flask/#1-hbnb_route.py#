@@ -6,6 +6,7 @@ from markupsafe import escape
 
 app = Flask(__name__)
 
+<p>The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.</p>
 
 @app.route('/')
 def index():
@@ -13,5 +14,5 @@ def index():
     return "Hello HBNB!"
 
 
-if __name__ == "__main__":
+if __name__== "__main__":
     app.run(host="0.0.0.0", port=5000)
