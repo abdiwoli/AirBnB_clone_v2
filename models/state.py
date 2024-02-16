@@ -5,7 +5,6 @@ from sqlalchemy import Column, String
 from sqlalchemy.orm import relationship
 from models.city import City
 from models import HBNB_TYPE_STORAGE
-#from models import storage
 
 
 class State(BaseModel, Base):
