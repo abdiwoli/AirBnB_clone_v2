@@ -8,7 +8,7 @@ from models.state import State
 app = Flask(__name__)
 
 
-@app.route('/')
+@app.route('/states_list', strict_slashes=False)
 def index():
     states = storage.all(State).values()
     states_list = [state.to_dict() for state in states]
