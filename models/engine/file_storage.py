@@ -20,6 +20,7 @@ class FileStorage:
         if cls is None:
             return FileStorage.__objects
 
+
         if isinstance(cls, str):
             cls = eval(cls)
 

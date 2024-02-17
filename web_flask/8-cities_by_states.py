@@ -1,6 +1,5 @@
 #!/usr/bin/python3
 """ import modules """
-
 from flask import Flask, jsonify, render_template
 from markupsafe import escape
 from models import HBNB_TYPE_STORAGE, storage
@@ -16,13 +15,12 @@ def teardown_appcontext(exception):
     storage.close()
 
 
-@app.route('/states_list', strict_slashes=False)
+@app.route('/cities_by_states', strict_slashes=False)
 def states_list():
     """ sates list"""
     states_list = sorted(list(storage.all("State").values()),
                          key=lambda x: x.name)
-
-    return render_template('7-states_list.html', states=states_list)
+    return render_template('8-cities_by_states.html', states=states_list)
 
 
 if __name__ == "__main__":
