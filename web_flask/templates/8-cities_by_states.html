@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-0;10;1c<HTML lang="en">
+<HTML lang="en">
     <HEAD>
         <TITLE>HBNB</TITLE>
     </HEAD>
@@ -10,7 +10,7 @@
 
             <LI>{{state.id}}: <B>{{state.name}}</B>
                 <UL>
-                     {% for city in state.cities %}
+                     {% for city in state.cities|sort(attribute='name') %}
                         <LI>{{city.id}}: <B>{{city.name}}</B></LI>
 		     {%endfor%}	
 

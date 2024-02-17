@@ -20,6 +20,7 @@ def states_list():
     """ sates list"""
     states_list = sorted(list(storage.all("State").values()),
                          key=lambda x: x.name)
+    print(states_list)
     return render_template('8-cities_by_states.html', states=states_list)
 
 
