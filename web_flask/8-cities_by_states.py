@@ -18,10 +18,10 @@ def teardown_appcontext(exception):
 @app.route('/cities_by_states', strict_slashes=False)
 def states_list():
     """ sates list"""
-    states_list = sorted(list(storage.all("State").values()),
-                         key=lambda x: x.name)
-    print(states_list)
-    return render_template('8-cities_by_states.html', states=states_list)
+    sts = [st for st in storage.all("State").values()
+           if st.name is not None]
+
+    return render_template('8-cities_by_states.html', states=sts)
 
 
 if __name__ == "__main__":
