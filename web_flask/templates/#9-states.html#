@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+0;10;1c<HTML lang="en">
+    <HEAD>
+        <TITLE>HBNB</TITLE>
+    </HEAD>
+    <BODY>
+        {% if states or states is not  %}
+        <H1>States</H1>
+        <UL>
+        {% for state in states %}
+            <LI>{{state.id}}: <B>{{state.name}}</B></LI>
+        {%endfor%}
+	</UL>
+	{%else%}
+	<H1>Not found!</H1>
+	{%endif%}
+    </BODY>
+</HTML>
