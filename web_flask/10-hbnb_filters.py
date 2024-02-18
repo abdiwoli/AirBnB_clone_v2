@@ -18,12 +18,13 @@ def teardown_appcontext(exception):
 @app.route('/hbnb_filters', strict_slashes=False)
 def hbnb_filters():
     """ sates list"""
-    states_list = sorted(list(storage.all("State").values()),
-                         key=lambda x: x.name)
-    amenity = [st for st in storage.all("Amenity").values() if st.name is not None]
-    print(amenity)
+    states_list = [st for st in storage.all("State").values()
+                   if st.name is not None]
+    amenity = [st for st in storage.all("Amenity").values()
+               if st.name is not None]
 
-    return render_template('10-hbnb_filters.html', states=states_list, amenities=amenity)
+    return render_template('10-hbnb_filters.html',
+                           states=states_list, amenities=amenity)
 
 
 if __name__ == "__main__":
