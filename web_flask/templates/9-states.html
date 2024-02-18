@@ -14,7 +14,7 @@
 	{%elif id and not states%}
 	<H1>Not found!</H1>
 	{% else %}
-	   <H1>State: {{states[0].name}}</H1>
+	<H1>State: {{states[0].name}}</H1>
         <H3>Cities:</H3>
         <UL>
 	  {% for city in states[0].cities %}
