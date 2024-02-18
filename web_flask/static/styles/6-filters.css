@@ -28,6 +28,7 @@ button:hover{
     width: 25%;
     border-right: solid 1px #DDDDDD;
     float: left;
+    z-index:1000;
 }
 .amenities{
     text-align: left;
@@ -59,6 +60,8 @@ button:hover{
     padding-bottom: 10%;
     overflow: scroll;
     max-height: 300px;
+    z-index:1000;
+    opacity:1;
 
 }
 .popover li h2{

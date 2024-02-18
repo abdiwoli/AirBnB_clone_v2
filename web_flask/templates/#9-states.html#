@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<HTML lang="en">
+    <HEAD>
+        <TITLE>HBNB</TITLE>
+    </HEAD>
+    <BODY>
+        {% if states and not id %}
+        <H1>States</H1>
+        <UL>
+        {% for state in states | sort(attribute="name") %}
+            <LI>{{state.id}}: <B>{{state.name}}</B></LI>
+        {%endfor%}
+	</UL>
+	{%elif id and not states%}
+	<H1>Not found!</H1>
+	{% else %}
+	 <H1>State: {{stat.name}}</H1>
+         <H3>Cities:</H3>
+         <UL>
+	   <H1>State: Illinois</H1>
+        <H3>Cities:</H3>
+        <UL>
+                <LI>521a55f4-7d82-47d9-b54c-a76916479552: <B>Chicago</B></LI>
+
+                <LI>561a55f4-7d82-47d9-b54c-a76916479552: <B>Joliet</B></LI>
+
+                <LI>541a55f4-7d82-47d9-b54c-a76916479552: <B>Naperville</B></LI>
+
+                <LI>531a55f4-7d82-47d9-b54c-a76916479552: <B>Peoria</B></LI>
+
+                <LI>551a55f4-7d82-47d9-b54c-a76916479552: <B>Urbana</B></LI>
+        </UL>
+                <LI>{{city.id}}: <B>{{city.name}}</B></LI>
+        </UL>
+	
+	{%endif%}
+    </BODY>
+</HTML>
