@@ -21,12 +21,13 @@ def teardown_appcontext(exception):
 def states(id=None):
     """ sates list"""
     if id is None:
-        states_list = sorted(storage.all("State").values(),
-                             key=lambda x: x.name)
+        states_list = [st for st in storage.all("State").values()
+                       if st is not None]
     else:
         states_list = [st for st in storage.all(State).values() if st.id == id]
     if len(states_list) > 0:
-        return render_template('9-states.html', states=states_list)
+        return render_template(
+            '9-states.html', states=states_list)
     else:
         return render_template('9-states.html')
 
