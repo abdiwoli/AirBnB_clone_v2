@@ -20,9 +20,9 @@ def states(id=None):
         states_list = [st for st in storage.all(State).values() if st.id == id]
     if len(states_list) > 0:
         return render_template(
-            '9-states.html', states=states_list)
+            '9-states.html', states=states_list, id=id)
     else:
-        return render_template('9-states.html')
+        return render_template('9-states.html', id=id)
 
 
 @app.teardown_appcontext
