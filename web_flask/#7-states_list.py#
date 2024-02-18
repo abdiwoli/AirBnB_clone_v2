@@ -18,11 +18,7 @@ def states_list():
     return render_template('7-states_list.html', states=states_list)
 
 
-@app.teardown_appcontext
-def teardown_appcontext(exception):
-    """ close sesion """
-    print("Teardown app context called.")
-    storage.close()
+  web_flask/templates/7-states_list.html
 
 
 if __name__ == "__main__":
