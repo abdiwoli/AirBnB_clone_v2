@@ -10,17 +10,21 @@ app = Flask(__name__)
 
 @app.teardown_appcontext
 def teardown_appcontext(exception):
-0;10;1c    """ close sesion """
+    """ close sesion """
     print("Teardown app context called.")
     storage.close()
 
 
-@app.route('/cities_by_states', strict_slashes=False)
-def states_list():
+@app.route('/hbnb_filters', strict_slashes=False)
+def hbnb_filters():
     """ sates list"""
-    states_list = sorted(list(storage.all("State").values()),
-                         key=lambda x: x.name)
-    return render_template('8-cities_by_states.html', states=states_list)
+    states_list = [st for st in storage.all("State").values()
+                   if st.name is not None]
+    amenity = [st for st in storage.all("Amenity").values()
+               if st.name is not None]
+
+    return render_template('10-hbnb_filters.html',
+                           states=states_list, amenities=amenity)
 
 
 if __name__ == "__main__":
