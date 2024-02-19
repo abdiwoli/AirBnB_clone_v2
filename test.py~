@@ -1,0 +1,15 @@
+from models.base_model import Base
+from sqlalchemy import create_engine
+
+# Set up the connection to the database
+engine = create_engine('mysql+mysqldb://hbnb_dev:hbnb_dev_pwd@localhost/hbnb_dev_db', pool_pre_ping=True)
+
+# Bind the engine to the Base.metadata
+Base.metadata.bind = engine
+
+# Drop the places table
+try:
+    Base.metadata.tables['places'].drop(bind=engine)
+    print("Table 'places' dropped successfully.")
+except Exception as e:
+    print(f"Error dropping table 'places': {e}")

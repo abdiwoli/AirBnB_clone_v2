@@ -1,0 +1,22 @@
+USE hbnb_dev_db;
+
+SET foreign_key_checks = 0;
+
+-- Disable foreign key checks temporarily
+
+DELETE FROM `cities` WHERE `state_id` IS NOT NULL;
+-- Delete all cities with a non-null state_id (associated with states)
+
+DELETE FROM `states`;
+
+-- Now you can safely delete all records from the states table
+
+SET foreign_key_checks = 1;
+-- Re-enable foreign key checks
+
+INSERT INTO `states` (id, created_at, updated_at, name) VALUES
+    ('421a55f4-7d82-47d9-b51c-a76916479545','2016-03-25 19:42:40','2016-03-25 19:42:40','stateA'),
+    ('421a55f4-7d82-47d9-b51c-a76916479546','2016-03-25 19:42:40','2016-03-25 19:42:40','stateB'),
+    ('421a55f4-7d82-47d9-b52c-a76916479547','2016-03-25 19:42:40','2016-03-25 19:42:40','stateC'),
+    ('421a55f4-7d82-47d9-b53c-a76916479548','2016-03-25 19:42:40','2016-03-25 19:42:40','stateD'),
+    ('421a55f4-7d82-47d9-b57c-a76916479549','2016-03-25 19:42:40','2016-03-25 19:42:40','stateE');
