@@ -21,8 +21,8 @@ def teardown_appcontext(exception):
 def states(id=None):
     """ sates list"""
     if id is None:
-        states_list = sorted(storage.all("State").values(),
-                             key=lambda x: x.name)
+        states_list = [st for st in storage.all("State").values()
+                       if st.name is not None]
     else:
         states_list = [st for st in storage.all(State).values() if st.id == id]
     if len(states_list) > 0:
