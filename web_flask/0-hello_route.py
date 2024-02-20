@@ -1,17 +1,20 @@
 #!/usr/bin/python3
-""" import modules """
+"""class Flask"""
 from flask import Flask
-from markupsafe import escape
+"""class Flask"""
 
 
 app = Flask(__name__)
 
 
-@app.route('/')
-def index():
-    """ main page """
+@app.route('/', strict_slashes=False)
+def hello_hbnb():
+    """displays text
+    Returns:
+        text
+    """
     return "Hello HBNB!"
 
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000)
+    app.run(host='0.0.0.0', port=5000)
